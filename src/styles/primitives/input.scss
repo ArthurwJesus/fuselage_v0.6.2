@@ -1,5 +1,3 @@
-@use '../lengths.scss';
-
 @mixin as-input(
   $background-color,
   $border-color,
@@ -8,13 +6,13 @@
   $focus-shadow-color,
   $active-border-color,
   $disabled-background-color,
-  $disabled-border-color
+  $disabled-border-color,
 ) {
-  border-width: lengths.border-width(default);
+  border-width: #{ $borders-width-x2 };
 
-  border-color: #{$border-color};
-  border-radius: theme('input-border-radius', lengths.border-radius(medium));
-  background-color: #{$background-color};
+  border-color: #{ $border-color };
+  border-radius: #{ $borders-radius-x2 };
+  background-color: #{ $background-color };
   @include use-no-shadow;
 
   @include on-hover {
@@ -27,13 +25,13 @@
   }
 
   @include on-active {
-    border-color: #{$active-border-color};
+    border-color: #{ $active-border-color };
     @include use-no-shadow;
   }
 
   @include on-disabled {
-    border-color: #{$disabled-border-color};
-    background-color: #{$disabled-background-color};
+    border-color: #{ $disabled-border-color };
+    background-color: #{ $disabled-background-color };
   }
 }
 
@@ -46,7 +44,7 @@
     $focus-shadow-color: $input-colors-focus-shadow-color,
     $active-border-color: $input-colors-active-border-color,
     $disabled-background-color: $input-colors-disabled-background-color,
-    $disabled-border-color: $input-colors-disabled-border-color
+    $disabled-border-color: $input-colors-disabled-border-color,
   );
 }
 
@@ -59,6 +57,6 @@
     $focus-shadow-color: $input-colors-invalid-focus-shadow-color,
     $active-border-color: $input-colors-invalid-active-border-color,
     $disabled-background-color: $input-colors-invalid-disabled-background-color,
-    $disabled-border-color: $input-colors-invalid-disabled-border-color
+    $disabled-border-color: $input-colors-invalid-disabled-border-color,
   );
 }

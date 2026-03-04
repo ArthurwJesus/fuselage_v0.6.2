@@ -1,37 +1,20 @@
-@use '../lengths.scss';
-@use '../typography.scss';
-
 %box {
-  flex: 0 1 auto;
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 
-  box-sizing: border-box;
+    transition: all $transitions-short-duration;
 
-  outline: none;
+    border-width: $borders-width-none;
+    border-style: solid;
+    border-color: currentColor;
 
-  font-variant-numeric: tabular-nums;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-%box--animated {
-  transition: all 0.18s;
-
-  @media (prefers-reduced-motion) {
-    transition: none;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-numeric: tabular-nums;
   }
-}
-
-%box--full {
-  margin: lengths.margin('none');
-  padding: lengths.padding('none');
-
-  border-width: lengths.border-width('none');
-  border-style: solid;
-  border-color: currentColor;
-
-  outline: none;
-
-  font-family: typography.font-family('sans');
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

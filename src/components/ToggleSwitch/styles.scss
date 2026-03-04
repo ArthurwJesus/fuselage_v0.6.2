@@ -1,0 +1,32 @@
+.rcx-toggle-switch {
+  @include is-selection-button($checked: 'primary', $unchecked: 'off');
+
+  &__input {
+    @extend %selection-button__input;
+  }
+
+  &__fake {
+    @extend %selection-button__fake;
+    border-radius: $borders-radius-full;
+    inline-size: calc(2 * #{$sizes-x20});
+  }
+
+  &__input + &__fake::before {
+    position: absolute;
+    left: 0;
+
+    width: calc(#{$sizes-x20} - 2 * #{$borders-width-x2});
+    height: calc(#{$sizes-x20} - 2 * #{$borders-width-x2});
+
+    content: '';
+
+    border-radius: 50%;
+
+    background-color: currentColor;
+  }
+
+  &__input:checked + &__fake::before {
+    left: calc(100% - #{ $sizes-x20 } + 2 * #{ $borders-width-x2 });
+    inset-inline-start: calc(100% - #{ $sizes-x20 } + 2 * #{ $borders-width-x2 });
+  }
+}

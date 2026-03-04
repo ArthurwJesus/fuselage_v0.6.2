@@ -1,0 +1,22 @@
+
+.rcx-option {
+  @include clickable;
+  @include use-text-style(p2);
+  @include use-text-ellipsis;
+
+  padding: $sizes-x8;
+
+  list-style: none;
+
+  transition: background $transitions-short-duration;
+  white-space: nowrap;
+
+  &:hover,
+  &--focus {
+    background: $colors-n400;
+  }
+
+  &--selected {
+    color: $text-colors-primary;
+  }
+}

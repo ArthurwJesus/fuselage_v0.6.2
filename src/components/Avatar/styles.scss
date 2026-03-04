@@ -1,0 +1,43 @@
+$avatar-stack-background-color: theme('avatar-background-color', $colors-white);
+
+.rcx-avatar {
+  @mixin use-size-modifier {
+    @each $size, $value in $sizes {
+      &--size-#{$size} {
+        width: $value;
+        height: $value;
+      }
+    }
+  }
+
+  display: inline-flex;
+
+  &__element {
+    position: relative;
+
+    flex: 1 1 auto;
+
+    border-radius: #{ $borders-width-x2 };
+    @include use-size-modifier;
+
+    &--rounded {
+      border-radius: 100%;
+    }
+  }
+
+  &-stack {
+    display: flex;
+    flex-direction: row-reverse;
+
+    color: #{ $avatar-stack-background-color };
+    justify-content: center;
+
+    & > .rcx-avatar {
+      margin: auto calc(#{ $borders-width-x2 } * -1);
+
+      & > .rcx-avatar__element {
+        border: #{ $borders-width-x2 } solid currentColor;
+      }
+    }
+  }
+}

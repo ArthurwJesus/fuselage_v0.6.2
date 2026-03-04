@@ -1,17 +1,14 @@
-@use 'sass:meta';
-@use 'sass:math';
-
 @function to-em($length) {
-  @if meta.type-of($length) == 'number' and math.is-unitless($length) {
-    @return math.div($length, 16) * 1em;
+  @if type-of($length) == number {
+    @return $length / 16 * 1em;
   }
 
   @return $length;
 }
 
 @function to-rem($length) {
-  @if meta.type-of($length) == 'number' and math.is-unitless($length) {
-    @return math.div($length, 16) * 1rem;
+  @if type-of($length) == number {
+    @return $length / 16 * 1rem;
   }
 
   @return $length;

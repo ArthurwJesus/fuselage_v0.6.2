@@ -1,0 +1,53 @@
+.rcx-callout {
+  display: flex;
+
+  padding-block: #{ $spaces-x16 };
+  padding-inline-start: #{ $spaces-x16 };
+  padding-inline-end: #{ $spaces-x32 };
+
+  border-radius: #{ $borders-radius-x2 };
+
+  &--type-info {
+    background-color: #{ $colors-b200 };
+  }
+
+  &--type-success {
+    background-color: #{ $colors-g200 };
+  }
+
+  &--type-warning {
+    background-color: #{ $colors-y200 };
+  }
+
+  &--type-danger {
+    background-color: #{ $colors-r200 };
+  }
+}
+
+.rcx-callout__wrapper {
+  display: flex;
+
+  overflow: hidden;
+  flex: 1 1 0;
+
+  margin-inline-start: #{ $spaces-x8 };
+
+  color: #{ $text-colors-default };
+  flex-flow: column nowrap;
+
+  @include use-text-style(c1);
+}
+
+.rcx-callout__title {
+  padding-block: #{ $spaces-x2 };
+
+  @include use-text-style(c2);
+  @include use-text-ellipsis;
+  white-space: nowrap;
+}
+
+.rcx-callout__children {
+  display: block;
+
+  padding-block: #{ $spaces-x2 };
+}

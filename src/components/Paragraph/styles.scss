@@ -1,0 +1,9 @@
+.rcx-paragraph {
+  display: block;
+
+  margin-block-end: $spaces-x16;
+  @include use-text-style(p1);
+  @include use-text-color(default);
+
+  @extend %rich-text--inline;
+}

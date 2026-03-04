@@ -1,0 +1,25 @@
+.rcx-tile {
+  @include use-text-style(p1);
+
+  display: block;
+
+  color: #{ $text-colors-default };
+
+  &--elevation-0 {
+    @extend %tile-0;
+  }
+
+  &--elevation-1 {
+    @extend %tile-1;
+  }
+
+  &--elevation-2 {
+    @extend %tile-2;
+  }
+
+  @each $name, $value in $spaces {
+    &--padding-#{$name} {
+      padding: $value;
+    }
+  }
+}

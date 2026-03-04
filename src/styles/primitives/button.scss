@@ -1,50 +1,105 @@
-@use 'sass:map';
-@use '../lengths';
-
-@import '../mixins/states.scss';
-@import '../mixins/shadows.scss';
-@import '../variables/button-colors';
-
-@mixin kind-variant($colors) {
-  color: map.get($colors, color);
-  border-width: theme('button-border-width', lengths.border-width('default'));
+@mixin as-button(
+  $color,
+  $background-color,
+  $border-color,
+  $hover-background-color,
+  $hover-border-color,
+  $active-background-color,
+  $active-border-color,
+  $focus-background-color,
+  $focus-border-color,
+  $focus-shadow-color,
+  $disabled-color,
+  $disabled-background-color,
+  $disabled-border-color,
+) {
+  color: $color;
+  border-width: $borders-width-x2;
   border-style: solid;
-  border-color: map.get($colors, border-color);
-  border-radius: theme('button-border-radius', lengths.border-radius(medium));
-  background-color: map.get($colors, background-color);
+  border-color: $border-color;
+  border-radius: $borders-radius-x2;
+  background-color: $background-color;
 
   appearance: none;
 
   @include on-focus-visible {
-    border-color: map.get($colors, focus-border-color);
-    background-color: map.get($colors, focus-background-color);
-    @include use-button-focus-shadow(map.get($colors, focus-shadow-color));
+    border-color: $focus-border-color;
+    background-color: $focus-background-color;
+    @include use-focus-shadow($focus-shadow-color);
   }
 
   @include on-hover {
-    border-color: map.get($colors, hover-border-color);
-    background-color: map.get($colors, hover-background-color);
+    border-color: $hover-border-color;
+    background-color: $hover-background-color;
     @include use-no-shadow;
   }
 
   @include on-active {
-    border-color: map.get($colors, active-border-color);
-    background-color: map.get($colors, active-background-color);
+    border-color: $active-border-color;
+    background-color: $active-background-color;
     @include use-no-shadow;
   }
 
-  @include on-pressed {
-    color: map.get($colors, pressed-color);
-    border-color: map.get($colors, pressed-border-color);
-    background-color: map.get($colors, pressed-background-color);
-  }
   @include on-disabled {
-    color: map.get($colors, disabled-color);
-    border-color: map.get($colors, disabled-border-color);
-    background-color: map.get($colors, disabled-background-color);
-
-    .rcx-button--content {
-      transform: none !important;
-    }
+    color: $disabled-color;
+    border-color: $disabled-border-color;
+    background-color: $disabled-background-color;
   }
+}
+
+// The first placeholder selectors are the ones which can be overwritten.
+// Change its ordering could have undesired effects.
+
+%button--secondary {
+  @include as-button(
+    $background-color: $button-colors-secondary-background-color,
+    $border-color: $button-colors-secondary-border-color,
+    $color: $button-colors-secondary-color,
+    $hover-background-color: $button-colors-secondary-hover-background-color,
+    $hover-border-color: $button-colors-secondary-hover-border-color,
+    $active-background-color: $button-colors-secondary-active-background-color,
+    $active-border-color: $button-colors-secondary-active-border-color,
+    $focus-background-color: $button-colors-secondary-focus-background-color,
+    $focus-border-color: $button-colors-secondary-focus-border-color,
+    $focus-shadow-color: $button-colors-secondary-focus-shadow-color,
+    $disabled-background-color: $button-colors-secondary-disabled-background-color,
+    $disabled-border-color: $button-colors-secondary-disabled-border-color,
+    $disabled-color: $button-colors-secondary-disabled-color,
+  );
+}
+
+%button--primary {
+  @include as-button(
+    $background-color: $button-colors-primary-background-color,
+    $border-color: $button-colors-primary-border-color,
+    $color: $button-colors-primary-color,
+    $hover-background-color: $button-colors-primary-hover-background-color,
+    $hover-border-color: $button-colors-primary-hover-border-color,
+    $active-background-color: $button-colors-primary-active-background-color,
+    $active-border-color: $button-colors-primary-active-border-color,
+    $focus-background-color: $button-colors-primary-focus-background-color,
+    $focus-border-color: $button-colors-primary-focus-border-color,
+    $focus-shadow-color: $button-colors-primary-focus-shadow-color,
+    $disabled-background-color: $button-colors-primary-disabled-background-color,
+    $disabled-border-color: $button-colors-primary-disabled-border-color,
+    $disabled-color: $button-colors-primary-disabled-color,
+  );
+}
+
+%button--danger {
+  @include as-button(
+    $background-color: $button-colors-danger-background-color,
+    $border-color: $button-colors-danger-border-color,
+    $color: $button-colors-danger-color,
+    $hover-background-color: $button-colors-danger-hover-background-color,
+    $hover-border-color: $button-colors-danger-hover-border-color,
+    $active-background-color: $button-colors-danger-active-background-color,
+    $active-border-color: $button-colors-danger-active-border-color,
+    $focus-background-color: $button-colors-danger-focus-background-color,
+    $focus-border-color: $button-colors-danger-focus-border-color,
+    $focus-shadow-color: $button-colors-danger-focus-shadow-color,
+    $disabled-background-color: $button-colors-danger-disabled-background-color,
+    $disabled-border-color: $button-colors-danger-disabled-border-color,
+    $disabled-color: $button-colors-danger-disabled-color,
+  );
 }

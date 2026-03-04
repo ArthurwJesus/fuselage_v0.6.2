@@ -1,0 +1,17 @@
+.rcx-label {
+  @include use-text-style(p2);
+  @include use-text-color(default);
+
+  &--disabled {
+    @include use-text-color(hint);
+    pointer-events: none;
+  }
+
+  &--required {
+    &::before {
+      content: '*\0a0';
+
+      @include use-text-color(danger);
+    }
+  }
+}

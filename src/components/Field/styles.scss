@@ -1,0 +1,51 @@
+.rcx-field {
+  display: flex;
+
+  width: 100%;
+  margin-block: calc(-1 * #{ $spaces-x2 });
+  align-items: stretch;
+  flex-flow: column nowrap;
+
+  &__label {
+    @include use-text-style(p2);
+    @include use-text-color(default);
+    flex: 1 1 0;
+
+    margin-block: $spaces-x2;
+    align-self: flex-start;
+  }
+
+  &__description {
+    @include use-text-style(p1);
+    @include use-text-color(hint);
+    @extend %rich-text--inline;
+    margin-block: $spaces-x2;
+  }
+
+  &__row {
+    display: flex;
+
+    margin-block: $spaces-x4 $spaces-x2;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    & .rcx-field__label {
+      padding-inline-start: $spaces-x8;
+    }
+  }
+
+  &__hint {
+    @include use-text-style(p1);
+    @include use-text-color(hint);
+    @extend %rich-text--inline;
+    margin-block: $spaces-x2;
+  }
+
+  &__error {
+    @include use-text-style(p1);
+    @include use-text-color(danger);
+    @extend %rich-text--inline;
+    margin-block: $spaces-x2;
+  }
+}

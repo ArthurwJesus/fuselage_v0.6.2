@@ -1,111 +1,79 @@
-import { resolve } from 'node:path';
+'use strict';
 
-import autoprefixer from 'autoprefixer';
-import cssnanoPlugin from 'cssnano';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import postcssDirPseudoClass from 'postcss-dir-pseudo-class';
-import postcssLogical from 'postcss-logical';
-import WrapperPlugin from 'wrapper-webpack-plugin';
+const path = require('path');
 
-import pkg from './package.json' with { type: 'json' };
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-export default (env, { mode = 'production' }) =>
-  /** @type {import('webpack').Configuration} */ ({
-    entry: {
-      fuselage: resolve(import.meta.dirname, 'src/index.ts'),
-    },
-    output: {
-      filename: `[name].${mode}.js`,
-      path: resolve(import.meta.dirname, 'dist'),
-      library: {
-        name: 'RocketChatFuselage',
-        type: 'umd',
-        umdNamedDefine: true,
+module.exports = (env, { mode = 'production' }) => ({
+  entry: {
+    fuselage: path.resolve(__dirname, 'src/index.js'),
+  },
+  output: {
+    filename: `[name].${ mode }.js`,
+    path: path.resolve(__dirname, 'dist'),
+    library: 'RocketChatFuselage',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+  },
+  devtool: mode === 'production' ? false : 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'lazySingletonStyleTag',
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-custom-properties')(),
+                require('postcss-logical')({ preserve: true }),
+                require('autoprefixer')(),
+                mode === 'production' && require('cssnano'),
+              ].filter(Boolean),
+            },
+          },
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  externals: [
+    {
+      react: {
+        commonjs: 'react',
+        commonjs2: 'react',
+        amd: 'react',
+        root: 'React',
       },
     },
-    devtool: mode === 'production' ? false : 'source-map',
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: 'babel-loader',
-        },
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'ts-loader',
-            options: {
-              configFile: resolve(import.meta.dirname, './tsconfig.build.json'),
-            },
-          },
-        },
-        {
-          test: /\.woff2$/,
-          type: 'asset/resource',
-          generator: {
-            filename: 'fonts/[name][ext]',
-          },
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            'babel-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 3,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: [
-                    postcssLogical({ preserve: true }),
-                    postcssDirPseudoClass({ dir: 'ltr' }),
-                    autoprefixer(),
-                    mode === 'production' && cssnanoPlugin,
-                  ].filter(Boolean),
-                },
-              },
-            },
-            'resolve-url-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true,
-              },
-            },
-          ],
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
-    },
-    externals: [
-      ...Object.keys(pkg.dependencies ?? {}).map(
-        (dep) => new RegExp(`^${dep}(/.+)?$`),
-      ),
-      ...Object.keys(pkg.peerDependencies ?? {}).map(
-        (dep) => new RegExp(`^${dep}(/.+)?$`),
-      ),
-    ],
-    plugins: [
-      new MiniCssExtractPlugin(),
-      mode !== 'production' &&
-        new WrapperPlugin({
-          test: /development\.js$/, // only wrap output of bundle files with '.js' extension
-          header: `'use strict';
-
-if (process.env.NODE_ENV !== "production") {
-(function() {
-`,
-          footer: `\n})();
-}`,
-        }),
-    ].filter(Boolean),
-  });
+    'react-dom',
+    '@rocket.chat/icons',
+    '@rocket.chat/fuselage-hooks',
+  ],
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      generateStatsFile: false,
+      reportFilename: '../bundle-report.html',
+      openAnalyzer: false,
+    }),
+  ],
+});

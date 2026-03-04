@@ -1,139 +1,35 @@
-<!--header-->
-
-<p align="center">
-  <a href="https://rocket.chat" title="Rocket.Chat">
-    <img src="https://github.com/RocketChat/Rocket.Chat.Artwork/raw/master/Logos/2020/png/logo-horizontal-red.png" alt="Rocket.Chat" />
-  </a>
+<h1>@rocket.chat/fuselage</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/npm/v/@rocket.chat/fuselage.svg">
+  <a href="https://github.com/RocketChat/Rocket.Chat.Fuselage#readme" target="_blank"><img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" /></a>
+  <a href="https://github.com/RocketChat/Rocket.Chat.Fuselage/graphs/commit-activity" target="_blank"><img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
+  <a href="https://rocketchat.github.io/Rocket.Chat.Fuselage" target="_blank"><img alt="Storybook" src="https://cdn.jsdelivr.net/gh/storybooks/brand@master/badge/badge-storybook.svg" /></a>
+  <a href="https://circleci.com/gh/RocketChat/Rocket.Chat.Fuselage" target="_blank"><img alt="Build Status on CircleCI" src="https://circleci.com/gh/RocketChat/Rocket.Chat.Fuselage/tree/master.svg?style=svg&circle-token=4bf3c8af9bf96e1338430d1ba3ce0084a45d1647" /></a>
+  <a href="https://twitter.com/RocketChat" target="_blank"><img alt="Twitter: RocketChat" src="https://img.shields.io/twitter/follow/RocketChat.svg?style=social" /></a>
 </p>
 
-# `@rocket.chat/fuselage`
-
-> Rocket.Chat's React Components Library
-
----
-
-[![npm@latest](https://img.shields.io/npm/v/@rocket.chat/fuselage/latest?style=flat-square)](https://www.npmjs.com/package/@rocket.chat/fuselage/v/latest) [![npm@next](https://img.shields.io/npm/v/@rocket.chat/fuselage/next?style=flat-square)](https://www.npmjs.com/package/@rocket.chat/fuselage/v/next) ![react version](https://img.shields.io/npm/dependency-version/@rocket.chat/fuselage/peer/react?style=flat-square) [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://rocketchat.github.io/fuselage/fuselage) ![npm downloads](https://img.shields.io/npm/dw/@rocket.chat/fuselage?style=flat-square) ![License: MIT](https://img.shields.io/npm/l/@rocket.chat/fuselage?style=flat-square)
-
-![deps](https://img.shields.io/librariesio/release/npm/@rocket.chat/fuselage?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/min/@rocket.chat/fuselage?style=flat-square)
-
-<!--/header-->
+### 🏠 [Homepage](https://rocket.chat/Rocket.Chat.Fuselage)
 
 ## Install
 
-<!--install-->
-
-Firstly, install the peer dependencies (prerequisites):
-
 ```sh
-npm i @rocket.chat/fuselage-hooks @rocket.chat/icons react react-dom react-virtuoso
-
-# or, if you are using yarn:
-
-yarn add @rocket.chat/fuselage-hooks @rocket.chat/icons react react-dom react-virtuoso
+npm install --save @rocket.chat/fuselage
 ```
 
-Add `@rocket.chat/fuselage` as a dependency:
+## Author
 
-```sh
-npm i @rocket.chat/fuselage
+👤 **Rocket.Chat**
 
-# or, if you are using yarn:
+* Twitter: [@RocketChat](https://twitter.com/RocketChat)
+* Github: [@RocketChat](https://github.com/RocketChat)
 
-yarn add @rocket.chat/fuselage
-```
+## 🤝 Contributing
 
-<!--/install-->
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/RocketChat/Rocket.Chat.Fuselage/issues).
 
-## Contributing
+## Show your support
 
-<!--contributing(msg)-->
+Give a ⭐️ if this project helped you!
 
-Contributions, issues, and feature requests are welcome!<br />
-Feel free to check the [issues](https://github.com/RocketChat/fuselage/issues).
-
-<!--/contributing(msg)-->
-
-### Building
-
-As this package dependends on others in this monorepo, before anything run the following at the root directory:
-
-<!--yarn(build)-->
-
-```sh
-yarn build
-```
-
-<!--/yarn(build)-->
-
-### Linting
-
-To ensure the source is matching our coding style, we perform [linting](<https://en.wikipedia.org/wiki/Lint_(software)>).
-Before commiting, check if your code fits our style by running:
-
-<!--yarn(lint)-->
-
-```sh
-yarn lint
-```
-
-<!--/yarn(lint)-->
-
-Some linter warnings and errors can be automatically fixed:
-
-<!--yarn(lint-and-fix)-->
-
-```sh
-yarn lint-and-fix
-```
-
-<!--/yarn(lint-and-fix)-->
-
-### Running tests
-
-Whenever possible, add tests to describe exactly what your code do. You can run them by yourself:
-
-<!--yarn(test)-->
-
-```sh
-yarn test
-```
-
-<!--/yarn(test)-->
-
-### Component stories
-
-We develop and describe our visual components in the form of stories, manage by a tool called [Storybook](https://storybook.js.org/).
-To start developing with Storybook, run:
-
-<!--yarn(storybook)-->
-
-```sh
-yarn storybook
-```
-
-<!--/yarn(storybook)-->
-
-### Usage
-
-To use the fuselage, you need to import the css first:
-
-```tsx
-import '@rocket.chat/fuselage/dist/fuselage.css';
-
-const MyButton = () => {
-  return <Button>Fuselage Button</<Button>
-};
-```
-
-Note: If you are using Next.js for development and wish to use Rocket.Chat Fuselage components, you need to dynamically import the component. More on this can be found [here](https://dev.to/vvo/how-to-solve-window-is-not-defined-errors-in-react-and-next-js-5f97#3-third-solution-dynamic-loading).
-
-Usage Example:
-
-```javascript
-import dynamic from 'next/dynamic';
-
-export const TextInput = dynamic(
-  () => import('@rocket.chat/fuselage').then((module) => module.TextInput),
-  { ssr: false },
-);
-```
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
