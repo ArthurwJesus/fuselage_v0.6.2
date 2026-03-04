@@ -1,0 +1,44 @@
+import type { ElementType } from 'react';
+import { createContext, forwardRef, useContext } from 'react';
+
+import { Box, type BoxProps } from '../Box';
+
+const LabelContext = createContext(false);
+
+export type LabelProps = Omit<BoxProps, 'is'> & {
+  disabled?: boolean;
+  required?: boolean;
+  is?: (ElementType<any> & string) | undefined;
+};
+
+/**
+ * A caption for an input component.
+ */
+const Label = forwardRef<HTMLElement, LabelProps>(function Label(
+  { disabled, is, required, children, ...props },
+  ref,
+) {
+  const isInsideLabel = useContext(LabelContext);
+  const component = is || (isInsideLabel && 'span') || 'label';
+
+  return (
+    <LabelContext.Provider value={true}>
+      <Box
+        is={component}
+        rcx-label
+        rcx-label--disabled={disabled}
+        {...props}
+        ref={ref}
+      >
+        {children}
+        {required && (
+          <Box is='span' rcx-label__required mis='x4' aria-hidden='true'>
+            *
+          </Box>
+        )}
+      </Box>
+    </LabelContext.Provider>
+  );
+});
+
+export default Label;

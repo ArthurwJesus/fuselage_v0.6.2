@@ -1,0 +1,50 @@
+import type {
+  FocusEventHandler,
+  FormEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  ReactNode,
+} from 'react';
+import { forwardRef } from 'react';
+
+import { FlexItem } from '../Flex';
+import { Input } from '../InputBox';
+
+type MultiSelectFilteredAnchorProps = {
+  children: ReactNode;
+  disabled: boolean;
+  filter: string;
+  onChangeFilter: (filter: string) => void;
+  placeholder?: string;
+  onClick: MouseEventHandler;
+  onBlur: FocusEventHandler;
+  onKeyUp: KeyboardEventHandler;
+  onKeyDown: KeyboardEventHandler;
+};
+
+const MultiSelectFilteredAnchor = forwardRef<
+  HTMLInputElement,
+  MultiSelectFilteredAnchorProps
+>(function MultiSelectFilteredAnchor(
+  { children: _children, filter, onChangeFilter, placeholder, ...props },
+  ref,
+) {
+  return (
+    <FlexItem grow={1}>
+      <Input
+        ref={ref}
+        placeholder={placeholder}
+        value={filter}
+        onInput={(e: FormEvent<HTMLInputElement>) =>
+          onChangeFilter(e.currentTarget.value)
+        }
+        {...props}
+        rcx-input-box--undecorated
+        aria-haspopup='listbox'
+        order={1}
+      />
+    </FlexItem>
+  );
+});
+
+export default MultiSelectFilteredAnchor;
