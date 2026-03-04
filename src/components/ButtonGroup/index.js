@@ -6,7 +6,7 @@ import { Box, PropsProvider } from '../Box';
 const Base = Box.extend('rcx-button-group');
 
 export function ButtonGroup({
-  align,
+  align = 'start',
   children,
   stretch,
   vertical,
@@ -27,9 +27,6 @@ export function ButtonGroup({
   </Base>;
 }
 
-ButtonGroup.defaultProps = {
-  align: 'start',
-};
 
 ButtonGroup.displayName = 'ButtonGroup';
 
